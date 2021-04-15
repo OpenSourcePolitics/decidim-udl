@@ -28,6 +28,11 @@ module Decidim
       expect(subject.user_groups).to eq([user_group])
     end
 
+    it "has registration metadata field" do
+      expect(subject).to respond_to(:registration_metadata)
+      expect(subject.registration_metadata).to be_a Hash
+    end
+
     describe "name" do
       context "when it has a name" do
         let(:user) { build(:user, name: "Oriol") }
