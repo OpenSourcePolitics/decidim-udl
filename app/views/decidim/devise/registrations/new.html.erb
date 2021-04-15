@@ -60,14 +60,19 @@
             <div class="card__content">
               <div class="field">
                 <%= f.label :status %>
-                <%= f.collection_radio_buttons :status, [["", ""], ["", ""], ["", ""], ["", ""]], :first, :last %>
+                  <% @form.statuses.each do |status| %>
+                    <div>
+                      <%= f.radio_button :status, status[:value], label: t(".#{status[:value]}"), data: {provenance: !status[:hidden]}  %>
+                    </div>
+                  <% end %>
               </div>
-              <div class="field hide">
+              <div class="field hide" id="registration_user_provenance_field">
                 <%= f.select :provenance,
-                                ["", "", ""],
-                                {include_blank: t(".blank") } %>
+                                options_for_select([["University 1","University 1", {'data-status'=>"student"}], ["University 2","University 2", {'data-status'=>"student"}],["personal","personal", {'data-status'=>"personal"}],["dupper","dupper", {'data-status'=>"student"}],["teacher","teacher", {'data-status'=>"teacher"}]], selected: false),
+                                {include_blank: t(".blank")} %>
               </div>
             </div>
+            <%= javascript_include_tag 'decidim/registration_form' %>
           </div>
 
           <div class="card" id="card__tos">

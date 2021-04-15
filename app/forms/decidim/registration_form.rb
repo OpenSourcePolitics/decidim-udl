@@ -5,6 +5,10 @@ module Decidim
   class RegistrationForm < Form
     mimic :user
 
+    STATUSES = [
+        { value: "student"},{ value: "teacher"},{ value: "personal"},{ value: "partner", hidden: true}
+    ]
+
     attribute :name, String
     attribute :nickname, String
     attribute :email, String
@@ -35,6 +39,10 @@ module Decidim
       Time.current
     end
 
+    def statuses
+      STATUSES
+    end
+
     private
 
     def email_unique_in_organization
@@ -47,6 +55,17 @@ module Decidim
 
     def no_pending_invitations_exist
       errors.add :base, I18n.t("devise.failure.invited") if User.has_pending_invitations?(current_organization.id, email)
+    end
+
+    def in_restricted_list?(value)
+      in_list = false
+      STATUSES.each do |status|
+        next if in_list
+
+        in_list = true if status[:value] == value && status[:hidden]
+      end
+
+      in_list
     end
   end
 end

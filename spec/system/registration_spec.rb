@@ -35,13 +35,36 @@ describe "Registration", type: :system do
         expect(page).to have_field("registration_user_status_partner", checked: false)
       end
 
+      it "hides provenance select" do
+        expect(page).to have_css("#registration_user_provenance", visible: false)
+      end
+
       context "when users choose a status" do
-        context "with status 'student'" do
-          it "shows the provenance dropdown" do
-            expect(page).to have_css("#registration_user_provenance", visible: false)
-            choose('user[status]', option: 'student')
-            expect(page).to have_css("#registration_user_provenance", visible: true)
+        shared_examples_for "choose registration status" do |status, visibility|
+          it "shows the provenance dropdown for status '#{status}'" do
+            choose("user[status]", option: status)
+
+            expect(page).to have_css("#registration_user_provenance", visible: visibility)
           end
+        end
+
+        it_behaves_like "choose registration status", "student"
+        it_behaves_like "choose registration status", "teacher"
+        it_behaves_like "choose registration status", "personal"
+        it_behaves_like "choose registration status", "partner", :hidden
+
+        context "when provenance list has options for selected status" do
+          shared_examples_for "options lists related to status" do |status|
+            it "shows the provenance dropdown" do
+              choose("user[status]", option: status)
+
+              within "#registration_user_provenance" do
+                expect(page).to have_css("option[data-status='#{status}']", visible: true)
+              end
+            end
+          end
+
+          it_behaves_like "options lists related to status", "student"
         end
       end
     end

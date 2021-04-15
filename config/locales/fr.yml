@@ -13,6 +13,10 @@ fr:
       registrations:
         new:
           blank: Renseignez votre provenance
+          student: I am a student
+          teacher: I am a teacher
+          personal: I am personal
+          partner: I am partner
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
