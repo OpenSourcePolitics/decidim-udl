@@ -9,6 +9,10 @@ fr:
       participatory_process:
         private_space: Espace privé
   decidim:
+    devise:
+      registrations:
+        new:
+          blank: Renseignez votre provenance
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique

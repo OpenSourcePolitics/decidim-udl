@@ -29,10 +29,20 @@ describe "Registration", type: :system do
         expect(page).to have_field("registration_user_password", with: "")
         expect(page).to have_field("registration_user_password_confirmation", with: "")
         expect(page).to have_field("registration_user_newsletter", checked: false)
-        expect(page).to have_field("registration_user_status[student]", checked: false)
-        expect(page).to have_field("registration_user_status[personal]", checked: false)
-        expect(page).to have_field("registration_user_status[teacher]", checked: false)
-        expect(page).to have_field("registration_user_status[partner]", checked: false)
+        expect(page).to have_field("registration_user_status_student", checked: false)
+        expect(page).to have_field("registration_user_status_personal", checked: false)
+        expect(page).to have_field("registration_user_status_teacher", checked: false)
+        expect(page).to have_field("registration_user_status_partner", checked: false)
+      end
+
+      context "when users choose a status" do
+        context "with status 'student'" do
+          it "shows the provenance dropdown" do
+            expect(page).to have_css("#registration_user_provenance", visible: false)
+            choose('user[status]', option: 'student')
+            expect(page).to have_css("#registration_user_provenance", visible: true)
+          end
+        end
       end
     end
   end

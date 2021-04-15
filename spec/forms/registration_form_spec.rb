@@ -18,6 +18,8 @@ module Decidim
     let(:email) { "user@example.org" }
     let(:password) { "S4CGQ9AM4ttJdPKS" }
     let(:password_confirmation) { password }
+    let(:status) { "student" }
+    let(:provenance) { "Lyon" }
     let(:tos_agreement) { "1" }
 
     let(:attributes) do
@@ -27,6 +29,8 @@ module Decidim
         email: email,
         password: password,
         password_confirmation: password_confirmation,
+        status: status,
+        provenance: provenance,
         tos_agreement: tos_agreement
       }
     end
@@ -49,6 +53,40 @@ module Decidim
 
     context "when the name is not present" do
       let(:name) { nil }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context "when the status is not present" do
+      let(:status) { nil }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context "when the provenance is not present" do
+      let(:provenance) { nil }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context "when the status is 'partner'" do
+      let(:status) { 'partner' }
+
+      context "and provenance is present" do
+        let(:provenance) { 'Lyon' }
+
+        it { is_expected.to be_invalid }
+      end
+
+      context "and provenance is not present" do
+        let(:provenance) { nil }
+
+        it { is_expected.to be_valid }
+      end
+    end
+
+    context "when the status is not present" do
+      let(:status) { nil }
 
       it { is_expected.to be_invalid }
     end
