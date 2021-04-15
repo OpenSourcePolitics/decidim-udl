@@ -29,6 +29,10 @@ describe "Registration", type: :system do
         expect(page).to have_field("registration_user_password", with: "")
         expect(page).to have_field("registration_user_password_confirmation", with: "")
         expect(page).to have_field("registration_user_newsletter", checked: false)
+        expect(page).to have_field("registration_user_status[student]", checked: false)
+        expect(page).to have_field("registration_user_status[personal]", checked: false)
+        expect(page).to have_field("registration_user_status[teacher]", checked: false)
+        expect(page).to have_field("registration_user_status[partner]", checked: false)
       end
     end
   end
