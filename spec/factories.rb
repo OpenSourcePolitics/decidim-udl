@@ -10,7 +10,6 @@ require "decidim/core/test/factories"
 # require "decidim/accountability/test/factories"
 require "decidim/system/test/factories"
 
-
 FactoryBot.modify do
   factory :user, class: "Decidim::User" do
     email { generate(:email) }

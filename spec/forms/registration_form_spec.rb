@@ -70,10 +70,10 @@ module Decidim
     end
 
     context "when the status is 'partner'" do
-      let(:status) { 'partner' }
+      let(:status) { "partner" }
 
       context "and provenance is present" do
-        let(:provenance) { 'Lyon' }
+        let(:provenance) { "Lyon" }
 
         it { is_expected.to be_invalid }
       end

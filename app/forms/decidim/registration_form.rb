@@ -6,8 +6,8 @@ module Decidim
     mimic :user
 
     STATUSES = [
-        { value: "student"},{ value: "teacher"},{ value: "personal"},{ value: "partner", hidden: true}
-    ]
+      { value: "student" }, { value: "teacher" }, { value: "personal" }, { value: "partner", hidden: true }
+    ].freeze
 
     PROVENANCE_SCOPE_TYPE = "Provenance"
 
@@ -87,11 +87,11 @@ module Decidim
       return if provenance_not_required?
 
       no_provenance_selected if provenance.blank?
-      #provenance_not_in_list if provenance_list.include? provenance
+      # provenance_not_in_list if provenance_list.include? provenance
     end
 
     def status_without_provenance
-      STATUSES.select { |stat| stat[:value] && stat[:hidden]  }&.collect { |status| status[:value] }
+      STATUSES.select { |stat| stat[:value] && stat[:hidden] }&.collect { |status| status[:value] }
     end
 
     def provenance_scope_type_id
