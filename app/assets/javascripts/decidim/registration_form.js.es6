@@ -23,6 +23,7 @@ $(document).ready(() => {
 
     const displayOptions = (value) => {
         $provenanceField.children("option:not([data-status='" + value + "'])").hide()
+        $provenanceField.children("option[data-status='student']").show()
         $provenanceField.children("option[data-status='" + value + "']").show()
     }
 });

@@ -68,7 +68,7 @@
               </div>
               <div class="field hide" id="registration_user_provenance_field">
                 <%= f.select :provenance,
-                                options_for_select([["University 1","University 1", {'data-status'=>"student"}], ["University 2","University 2", {'data-status'=>"student"}],["personal","personal", {'data-status'=>"personal"}],["dupper","dupper", {'data-status'=>"student"}],["teacher","teacher", {'data-status'=>"teacher"}]], selected: false),
+                               options_for_select(@form.provenances),
                                 {include_blank: t(".blank")} %>
               </div>
             </div>

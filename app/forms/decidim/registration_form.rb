@@ -9,6 +9,12 @@ module Decidim
       { value: "student" }, { value: "teacher" }, { value: "personal" }, { value: "partner", hidden: true }
     ].freeze
 
+    SCOPE_CODES = {
+      "student" => "SE-",
+      "teacher" => "ST-",
+      "personal" => "SP-"
+    }.freeze
+
     PROVENANCE_SCOPE_TYPE = "Provenance"
 
     attribute :name, String
@@ -31,6 +37,7 @@ module Decidim
     validates :password, password: { name: :name, email: :email, username: :nickname }
     validates :password_confirmation, presence: true
     validates :tos_agreement, allow_nil: false, acceptance: true
+    validates :status, presence: true, inclusion: { in: STATUSES.collect { |status| status[:value] } }
 
     validate :email_unique_in_organization
     validate :nickname_unique_in_organization
@@ -49,7 +56,9 @@ module Decidim
     end
 
     def provenances
-      scope_provenances
+      @provenances ||= [students_provenances, personal_provenances, teachers_provenances].flatten.map do |scope|
+        [scope.name[I18n.try(:locale).to_s || I18n.default_locale.to_s], scope.id, { "data-status" => search_in_scope_codes(scope.code) }]
+      end
     end
 
     private
@@ -74,32 +83,61 @@ module Decidim
       errors.add :status, I18n.t("devise.failure.no_provenance_selected")
     end
 
+    def provenance_not_needed
+      errors.add :status, I18n.t("devise.failure.no_provenance_selected")
+    end
+
     def provenance_not_in_list
+      return unless provenance_required?
+
       errors.add :provenance, I18n.t("devise.failure.not_in_list")
     end
 
-    def provenance_not_required?
-      status_without_provenance.include? status
+    def provenance_required?
+      status_with_provenance.include? status
     end
 
     def provenance_presence_required
       return no_status_selected if status.blank?
-      return if provenance_not_required?
+      return provenance_not_in_list unless statuses_list.include?(status)
+      return no_provenance_selected if provenance.blank? && provenance_required?
+      return provenance_not_needed if provenance.present? && !provenance_required?
 
-      no_provenance_selected if provenance.blank?
-      # provenance_not_in_list if provenance_list.include? provenance
+      provenance_not_in_list unless provenance_ids.include? provenance.try(:to_i)
     end
 
-    def status_without_provenance
-      STATUSES.select { |stat| stat[:value] && stat[:hidden] }&.collect { |status| status[:value] }
+    def provenance_ids
+      provenances.collect(&:second)
     end
 
-    def provenance_scope_type_id
-      Decidim::ScopeType.where(organization: current_organization).where("name ->>'fr' = ? ", PROVENANCE_SCOPE_TYPE)&.first.try(:id)
+    def statuses_list
+      STATUSES.collect { |stat| stat[:value] }
     end
 
-    def scope_provenances
-      Decidim::Scope.where(organization: current_organization, scope_type_id: provenance_scope_type_id)
+    def status_with_provenance
+      STATUSES.select { |stat| stat[:hidden].blank? }&.collect { |status| status[:value] }
+    end
+
+    def students_provenances
+      @students_provenances ||= find_provenance_for("student").to_a
+    end
+
+    def personal_provenances
+      @personal_provenances ||= find_provenance_for("personal").to_a
+    end
+
+    def teachers_provenances
+      @teachers_provenances ||= find_provenance_for("teacher").to_a
+    end
+
+    def find_provenance_for(type)
+      Decidim::Scope.where("code ~* ?", "^#{SCOPE_CODES[type]}")
+    end
+
+    def search_in_scope_codes(code)
+      SCOPE_CODES.values.each do |value|
+        return SCOPE_CODES.key(value) if code.start_with? value
+      end
     end
   end
 end

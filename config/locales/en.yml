@@ -1,5 +1,9 @@
 ---
 en:
+  devise:
+    failure:
+      not_in_list: Not in list
+      no_provenance_selected: No provenance selected
   activemodel:
     attributes:
       osp_authorization_handler:

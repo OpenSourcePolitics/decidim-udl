@@ -13,6 +13,13 @@ end
 describe "Registration", type: :system do
   let(:organization) { create(:organization) }
   let!(:terms_and_conditions_page) { Decidim::StaticPage.find_by(slug: "terms-and-conditions", organization: organization) }
+  let!(:students_scope_1) { create(:scope, organization: organization, code: "SE-1") }
+  let!(:students_scope_2) { create(:scope, organization: organization, code: "SE-2") }
+  let!(:teacher_scope_1) { create(:scope, organization: organization, code: "ST-1") }
+  let!(:teacher_scope_2) { create(:scope, organization: organization, code: "ST-2") }
+  let!(:personal_scope_1) { create(:scope, organization: organization, code: "SP-1") }
+  let!(:personal_scope_2) { create(:scope, organization: organization, code: "SP-2") }
+  let!(:scope) { create(:scope, organization: organization) }
 
   before do
     switch_to_host(organization.host)
@@ -59,12 +66,32 @@ describe "Registration", type: :system do
               choose("user[status]", option: status)
 
               within "#registration_user_provenance" do
+                expect(page).to have_css("option[data-status='student']", visible: true)
                 expect(page).to have_css("option[data-status='#{status}']", visible: true)
               end
             end
           end
 
           it_behaves_like "options lists related to status", "student"
+          it_behaves_like "options lists related to status", "teacher"
+          it_behaves_like "options lists related to status", "personal"
+
+          context "and selecting a provenance" do
+            it "is valid" do
+              fill_registration_form
+
+              choose("I am a student")
+              select students_scope_1.name["en"]
+
+              find(:css, "#registration_user_tos_agreement").set(true)
+              within "form.new_user" do
+                find("*[type=submit]").click
+              end
+
+              click_button "Keep uncheck"
+              expect(page).to have_content("You have signed up successfully")
+            end
+          end
         end
       end
     end
