@@ -56,7 +56,7 @@ module Decidim
     end
 
     def provenances
-      @provenances ||= [students_provenances, personal_provenances, teachers_provenances].flatten.map do |scope|
+      @provenances ||= [student_provenances, personal_provenances, teacher_provenances].flatten.map do |scope|
         [scope.name[I18n.try(:locale).to_s || I18n.default_locale.to_s], scope.id, { "data-status" => search_in_scope_codes(scope.code) }]
       end
     end
@@ -103,11 +103,27 @@ module Decidim
       return no_provenance_selected if provenance.blank? && provenance_required?
       return provenance_not_needed if provenance.present? && !provenance_required?
 
-      provenance_not_in_list unless provenance_ids.include? provenance.try(:to_i)
+      provenance_not_in_list unless provenance_for_status
     end
 
-    def provenance_ids
-      provenances.collect(&:second)
+    def provenance_for_status
+      status_exists = false
+
+      provenances.each do |prov|
+        status_exists = true if prov.second == provenance.try(:to_i) && prov.last["data-status"] == status
+      end
+
+      status_exists
+    end
+
+    def provenance_ids(status = "")
+      if status.present?
+        provenances.collect do |prov|
+          [prov.second, prov.third]
+        end
+      else
+        provenances.collect(&:second)
+      end
     end
 
     def statuses_list
@@ -118,16 +134,16 @@ module Decidim
       STATUSES.select { |stat| stat[:hidden].blank? }&.collect { |status| status[:value] }
     end
 
-    def students_provenances
-      @students_provenances ||= find_provenance_for("student").to_a
+    def student_provenances
+      @student_provenances ||= find_provenance_for("student").to_a
     end
 
     def personal_provenances
       @personal_provenances ||= find_provenance_for("personal").to_a
     end
 
-    def teachers_provenances
-      @teachers_provenances ||= find_provenance_for("teacher").to_a
+    def teacher_provenances
+      @teacher_provenances ||= find_provenance_for("teacher").to_a
     end
 
     def find_provenance_for(type)

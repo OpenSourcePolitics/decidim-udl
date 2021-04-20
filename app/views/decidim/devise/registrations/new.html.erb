@@ -70,11 +70,6 @@
                     <span class="form-error is-visible" role="alert"><%= error %></span>
                   <% end %>
                 <% end %>
-                <% if @form.errors.messages[:provenance].present? %>
-                  <% @form.errors.messages[:provenance].each do |error| %>
-                    <span class="form-error is-visible" role="alert"><%= error %></span>
-                  <% end %>
-                <% end %>
               </div>
               <div class="field hide" id="registration_user_provenance_field">
                 <%= f.select :provenance,
