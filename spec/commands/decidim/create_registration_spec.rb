@@ -15,15 +15,6 @@ module Decidim
         let(:password_confirmation) { password }
         let(:tos_agreement) { "1" }
         let(:newsletter) { "1" }
-        let(:registration_metadata) do
-          {
-            status: status,
-            provenance: scope_id
-          }
-        end
-
-        let(:status) { "student" }
-        let(:scope_id) { scope.id.to_s }
         let(:current_locale) { "es" }
 
         let(:form_params) do
@@ -35,8 +26,6 @@ module Decidim
               "password" => password,
               "password_confirmation" => password_confirmation,
               "tos_agreement" => tos_agreement,
-              "status" => status,
-              "provenance" => scope_id,
               "newsletter_at" => newsletter
             }
           }
@@ -50,7 +39,6 @@ module Decidim
           )
         end
         let(:command) { described_class.new(form) }
-        let!(:scope) { create(:scope, organization: organization, code: "SE-1") }
 
         describe "when the form is not valid" do
           before do
@@ -104,14 +92,13 @@ module Decidim
               email_on_notification: true,
               organization: organization,
               accepted_tos_version: organization.tos_version,
-              registration_metadata: registration_metadata,
               locale: form.current_locale
             ).and_call_original
 
             expect { command.call }.to change(User, :count).by(1)
           end
 
-          describe "when user keeps the newsletter unchecked" do
+          describe "when user keep uncheck newsletter" do
             let(:newsletter) { "0" }
 
             it "creates a user with no newsletter notifications" do

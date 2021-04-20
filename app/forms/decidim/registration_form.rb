@@ -80,11 +80,11 @@ module Decidim
     end
 
     def no_provenance_selected
-      errors.add :status, I18n.t("devise.failure.no_provenance_selected")
+      errors.add :provenance, I18n.t("devise.failure.no_provenance_selected")
     end
 
     def provenance_not_needed
-      errors.add :status, I18n.t("devise.failure.no_provenance_selected")
+      errors.add :provenance, I18n.t("devise.failure.not_needed")
     end
 
     def provenance_not_in_list

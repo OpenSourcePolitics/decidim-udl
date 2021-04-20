@@ -9,14 +9,6 @@ fr:
       participatory_process:
         private_space: Espace privé
   decidim:
-    devise:
-      registrations:
-        new:
-          blank: Renseignez votre provenance
-          student: I am a student
-          teacher: I am a teacher
-          personal: I am personal
-          partner: I am partner
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
@@ -31,12 +23,26 @@ fr:
       cookies:
         jsessionid:
           description: Le cookie JSESSIONID permet de sauvegarder un identifiant de session. Celui-ci est nécessaire pour permettre à New Relic de monitorer la session.
+    devise:
+      registrations:
+        new:
+          blank: Renseignez votre provenance
+          partner: I am partner
+          personal: I am personal
+          student: I am a student
+          teacher: I am a teacher
     verifications:
       authorizations:
         first_login:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+  devise:
+    failure:
+      no_provenance_selected: Veuillez sélectionner une provenance
+      no_status_selected: Veuillez sélectionner un statut
+      not_in_list: Cette provenance n'est pas référencée dans la liste
+      not_needed: Champs non nécessaire
   faker:
     address:
       country_code:

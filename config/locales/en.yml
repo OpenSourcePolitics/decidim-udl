@@ -1,9 +1,5 @@
 ---
 en:
-  devise:
-    failure:
-      not_in_list: Not in list
-      no_provenance_selected: No provenance selected
   activemodel:
     attributes:
       osp_authorization_handler:
@@ -13,14 +9,6 @@ en:
       participatory_process:
         private_space: Espace privé
   decidim:
-    devise:
-      registrations:
-        new:
-          blank: Please select a provenance
-          student: I am a student
-          teacher: I am a teacher
-          personal: I am personal
-          partner: I am partner
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
@@ -35,12 +23,26 @@ en:
       cookies:
         jsessionid:
           description: Le cookie JSESSIONID permet de sauvegarder un identifiant de session. Celui-ci est nécessaire pour permettre à New Relic de monitorer la session.
+    devise:
+      registrations:
+        new:
+          blank: Please select a provenance
+          partner: I am partner
+          personal: I am personal
+          student: I am a student
+          teacher: I am a teacher
     verifications:
       authorizations:
         first_login:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+  devise:
+    failure:
+      no_provenance_selected: No provenance selected
+      no_status_selected: No status selected
+      not_in_list: Not in list
+      not_needed: Not needed
   faker:
     address:
       country_code: '["FR", "FR0", "FR1", "FR2", "FR3", "FR4", "FR5", "FR6", "FR7", "FR8", "FR9"]'
