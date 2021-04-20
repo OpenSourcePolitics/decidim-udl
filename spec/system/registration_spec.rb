@@ -43,7 +43,7 @@ describe "Registration", type: :system do
       end
 
       it "hides provenance select" do
-        expect(page).to have_css("#registration_user_provenance", visible: false)
+        expect(page).to have_css("#registration_user_provenance", visible: :hidden)
       end
 
       context "when users choose a status" do
@@ -66,8 +66,8 @@ describe "Registration", type: :system do
               choose("user[status]", option: status)
 
               within "#registration_user_provenance" do
-                expect(page).to have_css("option[data-status='student']", visible: true)
-                expect(page).to have_css("option[data-status='#{status}']", visible: true)
+                expect(page).to have_css("option[data-status='student']", visible: :visible)
+                expect(page).to have_css("option[data-status='#{status}']", visible: :visible)
               end
             end
           end
