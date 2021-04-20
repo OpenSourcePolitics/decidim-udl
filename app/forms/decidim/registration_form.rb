@@ -5,17 +5,8 @@ module Decidim
   class RegistrationForm < Form
     mimic :user
 
-    STATUSES = [
-      { value: "student" }, { value: "teacher" }, { value: "personal" }, { value: "partner", hidden: true }
-    ].freeze
-
-    SCOPE_CODES = {
-      "student" => "SE-",
-      "teacher" => "ST-",
-      "personal" => "SP-"
-    }.freeze
-
-    PROVENANCE_SCOPE_TYPE = "Provenance"
+    STATUSES = [{ value: "student" }, { value: "teacher" }, { value: "personal" }, { value: "partner", hidden: true }].freeze
+    SCOPE_CODES = { "student" => "SE-", "teacher" => "ST-", "personal" => "SP-" }.freeze
 
     attribute :name, String
     attribute :nickname, String
@@ -29,8 +20,6 @@ module Decidim
     attribute :provenance, String
 
     validates :name, presence: true
-    validates :status, presence: true
-
     validates :nickname, presence: true, format: /\A[\w\-]+\z/, length: { maximum: Decidim::User.nickname_max_length }
     validates :email, presence: true, 'valid_email_2/email': { disposable: true }
     validates :password, confirmation: true
@@ -114,16 +103,6 @@ module Decidim
       end
 
       status_exists
-    end
-
-    def provenance_ids(status = "")
-      if status.present?
-        provenances.collect do |prov|
-          [prov.second, prov.third]
-        end
-      else
-        provenances.collect(&:second)
-      end
     end
 
     def statuses_list
