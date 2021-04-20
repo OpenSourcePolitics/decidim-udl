@@ -9,6 +9,13 @@ en:
       participatory_process:
         private_space: Espace privé
   decidim:
+    admin:
+      scopes:
+        form:
+          scope_code_information: "If this scope aims to be a provenance for the registration form, please ensure your Scope code begins according to the statuses :"
+          scope_code_for_student: "Student : %{code}"
+          scope_code_for_teacher: "Teacher : %{code}"
+          scope_code_for_personal: "Personal : %{code}"
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique

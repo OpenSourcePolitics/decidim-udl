@@ -9,6 +9,13 @@ fr:
       participatory_process:
         private_space: Espace privé
   decidim:
+    admin:
+      scopes:
+        form:
+          scope_code_information: "Si ce scope a pour vocation d'être une provenance dans le formulaire d'inscription, veuillez noter que le début du code doit correspondre à son statut :"
+          scope_code_for_student: "Étudiant : %{code}"
+          scope_code_for_teacher: "Enseignant / Chercheur : %{code}"
+          scope_code_for_personal: "Personnel : %{code}"
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
@@ -27,10 +34,10 @@ fr:
       registrations:
         new:
           blank: Renseignez votre provenance
-          partner: I am partner
-          personal: I am personal
-          student: I am a student
-          teacher: I am a teacher
+          partner: Partenaire
+          personal: Personnel
+          student: Étudiant
+          teacher: Enseignant / Chercheur
     verifications:
       authorizations:
         first_login:
