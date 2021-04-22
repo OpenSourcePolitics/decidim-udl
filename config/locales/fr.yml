@@ -47,7 +47,6 @@ fr:
   devise:
     failure:
       no_provenance_selected: Veuillez sélectionner une provenance
-      no_status_selected: Veuillez sélectionner un statut
       not_in_list: Cette provenance n'est pas référencée dans la liste
       not_needed: Champs non nécessaire
   faker:

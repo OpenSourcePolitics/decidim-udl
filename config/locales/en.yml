@@ -47,7 +47,6 @@ en:
   devise:
     failure:
       no_provenance_selected: No provenance selected
-      no_status_selected: No status selected
       not_in_list: Not in list
       not_needed: Not needed
   faker:
