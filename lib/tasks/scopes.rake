@@ -171,12 +171,8 @@ def scopes
     teacher: {
       name: [
         {
-          fr: "Siège Université de Lille (Site Paul Duez) - Services communs",
-          en: "Siège Université de Lille (Site Paul Duez) - Services communs"
-        },
-        {
-          fr: "Siège Université de Lille (Site Paul Duez) - Services centraux",
-          en: "Siège Université de Lille (Site Paul Duez) - Services centraux"
+          fr: "Fondation I-Site",
+          en: "Fondation I-Site"
         }
       ],
       code_prefix: "ST-"
@@ -184,8 +180,12 @@ def scopes
     personal: {
       name: [
         {
-          fr: "Fondation I-Site",
-          en: "Fondation I-Site"
+          fr: "Siège Université de Lille (Site Paul Duez) - Services communs",
+          en: "Siège Université de Lille (Site Paul Duez) - Services communs"
+        },
+        {
+          fr: "Siège Université de Lille (Site Paul Duez) - Services centraux",
+          en: "Siège Université de Lille (Site Paul Duez) - Services centraux"
         }
       ],
       code_prefix: "SP-"
