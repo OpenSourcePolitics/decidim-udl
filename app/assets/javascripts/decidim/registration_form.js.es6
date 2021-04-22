@@ -16,8 +16,7 @@ $(document).ready(() => {
             }
         }
 
-        $provenanceField.children('option:selected').removeAttr("selected")
-        $provenanceField.val("")
+        clearProvenanceField()
     })
 
     const isInRestrictedList = ($target) => {
@@ -33,6 +32,11 @@ $(document).ready(() => {
         }  else if (value === "student") {
             displaySelectedOptions(value)
         }
+    }
+
+    const clearProvenanceField = () => {
+        $provenanceField.children('option:selected').removeAttr("selected")
+        $provenanceField.val("")
     }
 
     const displayAllOptions = () => {
