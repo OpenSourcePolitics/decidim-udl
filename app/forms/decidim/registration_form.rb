@@ -99,7 +99,7 @@ module Decidim
       status_exists = false
 
       provenances.each do |prov|
-        status_exists = true if prov.second == provenance.try(:to_i) && prov.last["data-status"] == status
+        status_exists = true if prov.second == provenance.try(:to_i)
       end
 
       status_exists

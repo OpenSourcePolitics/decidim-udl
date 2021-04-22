@@ -15,6 +15,9 @@ $(document).ready(() => {
                 $provenanceFieldDiv.addClass('hide')
             }
         }
+
+        $provenanceField.children('option:selected').removeAttr("selected")
+        $provenanceField.val("")
     })
 
     const isInRestrictedList = ($target) => {
