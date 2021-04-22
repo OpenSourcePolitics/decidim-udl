@@ -74,6 +74,10 @@ def scopes
           en: "Faculté de pharmacie"
         },
         {
+          fr: "Faculté des humanités",
+          en: "Faculté des humanités"
+        },
+        {
           fr: "Faculté des langues, littératures et civilisations étrangères",
           en: "Faculté des langues, littératures et civilisations étrangères"
         },
