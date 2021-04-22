@@ -1,33 +1,79 @@
+---
 fr:
   activemodel:
     attributes:
-      participatory_process:
-        private_space: Espace privé
       osp_authorization_handler:
+        birthday: Date de naissance
         document_number: Numéro unique
         postal_code: Code postal
-        birthday: Date de naissance
+      participatory_process:
+        private_space: Espace privé
   decidim:
+    admin:
+      scopes:
+        form:
+          scope_code_for_personal: 'Personnel : %{code}'
+          scope_code_for_student: 'Étudiant : %{code}'
+          scope_code_for_teacher: 'Enseignant / Chercheur : %{code}'
+          scope_code_information: 'Si ce scope a pour vocation d''être une provenance dans le formulaire d''inscription, veuillez noter que le début du code doit correspondre à son statut :'
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
         fields:
+          birthday: Date de naissance
           document_number: Numéro unique
           postal_code: Code postal
-          birthday: Date de naissance
         name: Formulaire de vérification d'identité
       osp_authorization_workflow:
         name: Procédure d'autorisation
+    components:
+      cookies:
+        jsessionid:
+          description: Le cookie JSESSIONID permet de sauvegarder un identifiant de session. Celui-ci est nécessaire pour permettre à New Relic de monitorer la session.
+    devise:
+      registrations:
+        new:
+          blank: Renseignez votre provenance
+          partner: Partenaire
+          personal: Personnel
+          student: Étudiant
+          teacher: Enseignant / Chercheur
     verifications:
       authorizations:
         first_login:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+  devise:
+    failure:
+      no_provenance_selected: Veuillez sélectionner une provenance
+      not_in_list: Cette provenance n'est pas référencée dans la liste
+      not_needed: Champs non nécessaire
+  faker:
+    address:
+      country_code:
+      - FR
+      - FR0
+      - FR1
+      - FR2
+      - FR3
+      - FR4
+      - FR5
+      - FR6
+      - FR7
+      - FR8
+      - FR9
   layouts:
     decidim:
       footer:
         download_open_data: Données ouvertes
-  faker:
-    address:
-      country_code: ['FR','FR0','FR1','FR2','FR3','FR4','FR5','FR6','FR7','FR8','FR9']
+        made_with_open_source: Made with open source
+        revoke_cookies: Revoke cookies
+      header:
+        close_menu: Close menu
+        navigation: Navigation
+        sign_in: Sign in
+        sign_up: Sign up
+      user_menu:
+        conversations: Conversations
+        notifications: Notifications
