@@ -36,6 +36,8 @@ fr:
           blank: Renseignez votre provenance
           partner: Partenaire
           personal: Personnel
+          provenance: Provenance
+          status: Statut
           student: Étudiant
           teacher: Enseignant / Chercheur
     verifications:
