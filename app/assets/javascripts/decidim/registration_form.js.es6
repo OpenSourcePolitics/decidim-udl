@@ -22,9 +22,9 @@ $(document).ready(() => {
     }
 
     const displayOptionsFor = (value) => {
-        if (value === "teacher") {
+        if (value === "personal") {
             displayAllOptions()
-        } else if (value === "personal") {
+        } else if (value === "teacher") {
             displaySelectedOptions(value)
             displayBasicOptions()
         }  else if (value === "student") {
