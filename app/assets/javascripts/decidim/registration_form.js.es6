@@ -1,21 +1,17 @@
 $(document).ready(() => {
     const $provenanceFieldDiv = $("#registration_user_provenance_field")
     const $provenanceField = $("#registration_user_provenance")
+    const $radioButtons = $("input[type='radio'][data-provenance=true]:checked")
 
     $("input[name='user[status]'][type='radio']").on("change", (checkedStatus) => {
         const $target = $(checkedStatus.currentTarget)
 
         if ($target.is(":checked") && !isInRestrictedList($target)) {
             displayOptionsFor($target.val())
-            if ($provenanceFieldDiv.hasClass("hide") === true) {
-                $provenanceFieldDiv.removeClass('hide')
-            }
+            displayProvenanceField()
         } else {
-            if ($provenanceFieldDiv.hasClass("hide") === false) {
-                $provenanceFieldDiv.addClass('hide')
-            }
+            hideProvenanceField()
         }
-
         clearProvenanceField()
     })
 
@@ -31,6 +27,18 @@ $(document).ready(() => {
             displayBasicOptions()
         }  else if (value === "student") {
             displaySelectedOptions(value)
+        }
+    }
+
+    const displayProvenanceField = () => {
+        if ($provenanceFieldDiv.hasClass("hide") === true) {
+            $provenanceFieldDiv.removeClass('hide')
+        }
+    }
+
+    const hideProvenanceField = () => {
+        if ($provenanceFieldDiv.hasClass("hide") === false) {
+            $provenanceFieldDiv.addClass('hide')
         }
     }
 
@@ -50,5 +58,10 @@ $(document).ready(() => {
 
     const displayBasicOptions = () => {
         $provenanceField.children("option[data-status='student']").show()
+    }
+
+    if ($radioButtons.length > 0) {
+        displayOptionsFor($radioButtons.eq(0).val())
+        displayProvenanceField()
     }
 });

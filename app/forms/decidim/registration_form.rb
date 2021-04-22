@@ -64,10 +64,6 @@ module Decidim
       errors.add :base, I18n.t("devise.failure.invited") if User.has_pending_invitations?(current_organization.id, email)
     end
 
-    def no_status_selected
-      errors.add :status, I18n.t("devise.failure.no_status_selected")
-    end
-
     def no_provenance_selected
       errors.add :provenance, I18n.t("devise.failure.no_provenance_selected")
     end
@@ -87,7 +83,7 @@ module Decidim
     end
 
     def provenance_presence_required
-      return no_status_selected if status.blank?
+      return if status.blank?
       return provenance_not_in_list unless statuses_list.include?(status)
       return no_provenance_selected if provenance.blank? && provenance_required?
       return provenance_not_needed if provenance.present? && !provenance_required?
