@@ -6,7 +6,7 @@ $(document).ready(() => {
         const $target = $(checkedStatus.currentTarget)
 
         if ($target.is(":checked") && !isInRestrictedList($target)) {
-            displayOptions($target.val())
+            displayOptionsFor($target.val())
             if ($provenanceFieldDiv.hasClass("hide") === true) {
                 $provenanceFieldDiv.removeClass('hide')
             }
@@ -21,9 +21,27 @@ $(document).ready(() => {
         return $target.data("provenance") === false
     }
 
-    const displayOptions = (value) => {
-        $provenanceField.children("option:not([data-status='" + value + "'])").hide()
+    const displayOptionsFor = (value) => {
+        if (value === "teacher") {
+            displayAllOptions()
+        } else if (value === "personal") {
+            displaySelectedOptions(value)
+            displayBasicOptions()
+        }  else if (value === "student") {
+            displaySelectedOptions(value)
+        }
+    }
+
+    const displayAllOptions = () => {
+        $provenanceField.children("option").show()
+    }
+
+    const displaySelectedOptions = (value) => {
+        $provenanceField.children(`option:not([data-status='${value}'])`).hide()
+        $provenanceField.children(`option[data-status='${value}']`).show()
+    }
+
+    const displayBasicOptions = () => {
         $provenanceField.children("option[data-status='student']").show()
-        $provenanceField.children("option[data-status='" + value + "']").show()
     }
 });
