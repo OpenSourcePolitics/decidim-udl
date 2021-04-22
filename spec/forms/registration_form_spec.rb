@@ -18,6 +18,8 @@ module Decidim
     let(:email) { "user@example.org" }
     let(:password) { "S4CGQ9AM4ttJdPKS" }
     let(:password_confirmation) { password }
+    let(:status) { "student" }
+    let(:provenance) { scope.id }
     let(:tos_agreement) { "1" }
 
     let(:attributes) do
@@ -27,6 +29,8 @@ module Decidim
         email: email,
         password: password,
         password_confirmation: password_confirmation,
+        status: status,
+        provenance: provenance,
         tos_agreement: tos_agreement
       }
     end
@@ -36,6 +40,8 @@ module Decidim
         current_organization: organization
       }
     end
+
+    let!(:scope) { create(:scope, organization: organization, code: "SE-1") }
 
     context "when everything is OK" do
       it { is_expected.to be_valid }
@@ -51,6 +57,58 @@ module Decidim
       let(:name) { nil }
 
       it { is_expected.to be_invalid }
+    end
+
+    context "when the status is not present" do
+      let(:status) { nil }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context "when the status is present" do
+      let(:status) { "student" }
+
+      it { is_expected.to be_valid }
+
+      context "and status is not in list" do
+        let(:status) { "Unknown status" }
+
+        it { is_expected.to be_invalid }
+      end
+
+      context "and provenance is present" do
+        let(:provenance) { scope.id }
+
+        it { is_expected.to be_valid }
+
+        context "and is not present in list" do
+          let(:provenance) { 235 }
+
+          it { is_expected.to be_invalid }
+        end
+      end
+    end
+
+    context "when the provenance is not present" do
+      let(:provenance) { nil }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context "when the status is 'partner'" do
+      let(:status) { "partner" }
+
+      context "and provenance is present" do
+        let(:provenance) { scope.id }
+
+        it { is_expected.to be_invalid }
+      end
+
+      context "and provenance is not present" do
+        let(:provenance) { nil }
+
+        it { is_expected.to be_valid }
+      end
     end
 
     context "when the nickname is not present" do

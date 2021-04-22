@@ -92,9 +92,10 @@ search:
 #   deepl_api_key: "XXXXXXXX-XXXXX-XXX-XXXX-XXXXXXXXXX"
 
 ## Do not consider these keys missing:
-# ignore_missing:
-# - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
-# - '{devise,simple_form}.*'
+ignore_missing:
+- decidim.devise.registrations.new.*
+- devise.failure.invited
+- devise.registrations.new.sign_up
 
 ## Consider these keys used:
 ignore_unused:

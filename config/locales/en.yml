@@ -9,6 +9,13 @@ en:
       participatory_process:
         private_space: Espace privé
   decidim:
+    admin:
+      scopes:
+        form:
+          scope_code_for_personal: 'Personal : %{code}'
+          scope_code_for_student: 'Student : %{code}'
+          scope_code_for_teacher: 'Teacher : %{code}'
+          scope_code_information: 'If this scope aims to be a provenance for the registration form, please ensure your Scope code begins according to the statuses :'
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
@@ -23,12 +30,25 @@ en:
       cookies:
         jsessionid:
           description: Le cookie JSESSIONID permet de sauvegarder un identifiant de session. Celui-ci est nécessaire pour permettre à New Relic de monitorer la session.
+    devise:
+      registrations:
+        new:
+          blank: Please select a provenance
+          partner: I am partner
+          personal: I am personal
+          student: I am a student
+          teacher: I am a teacher
     verifications:
       authorizations:
         first_login:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+  devise:
+    failure:
+      no_provenance_selected: No provenance selected
+      not_in_list: Not in list
+      not_needed: Not needed
   faker:
     address:
       country_code: '["FR", "FR0", "FR1", "FR2", "FR3", "FR4", "FR5", "FR6", "FR7", "FR8", "FR9"]'
