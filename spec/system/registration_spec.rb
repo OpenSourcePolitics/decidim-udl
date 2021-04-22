@@ -73,8 +73,17 @@ describe "Registration", type: :system do
           end
 
           it_behaves_like "options lists related to status", "student"
-          it_behaves_like "options lists related to status", "teacher"
           it_behaves_like "options lists related to status", "personal"
+
+          it "shows the provenance dropdown for status teacher" do
+            choose("user[status]", option: "teacher")
+
+            within "#registration_user_provenance" do
+              expect(page).to have_css("option[data-status='student']", visible: :visible)
+              expect(page).to have_css("option[data-status='teacher']", visible: :visible)
+              expect(page).to have_css("option[data-status='personal']", visible: :visible)
+            end
+          end
 
           context "and selecting a provenance" do
             it "is valid" do
