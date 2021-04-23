@@ -36,6 +36,8 @@ en:
           blank: Please select a provenance
           partner: I am partner
           personal: I am personal
+          provenance: Provenance
+          status: Status
           student: I am a student
           teacher: I am a teacher
     verifications:

@@ -59,7 +59,7 @@
           <div class="card" id="card__statuses">
             <div class="card__content">
               <div class="field">
-                <%= f.label :status %>
+                <%= f.label :status, t(".status") %>
                   <% @form.statuses.each do |status| %>
                     <div>
                       <%= f.radio_button :status, status[:value], label: t(".#{status[:value]}"), data: { provenance: !status[:hidden] } %>
@@ -74,7 +74,7 @@
               <div class="field hide" id="registration_user_provenance_field">
                 <%= f.select :provenance,
                                options_for_select(@form.provenances),
-                                { include_blank: t(".blank") } %>
+                                { include_blank: t(".blank"), label: t(".provenance") } %>
               </div>
             </div>
             <%= javascript_include_tag "decidim/registration_form" %>
