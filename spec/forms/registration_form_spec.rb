@@ -21,6 +21,7 @@ module Decidim
     let(:status) { "student" }
     let(:provenance) { scope.id }
     let(:tos_agreement) { "1" }
+    let(:rgpd_agreement) { "1" }
 
     let(:attributes) do
       {
@@ -31,7 +32,8 @@ module Decidim
         password_confirmation: password_confirmation,
         status: status,
         provenance: provenance,
-        tos_agreement: tos_agreement
+        tos_agreement: tos_agreement,
+        rgpd_agreement: rgpd_agreement
       }
     end
 
@@ -179,6 +181,12 @@ module Decidim
 
     context "when the tos_agreement is not accepted" do
       let(:tos_agreement) { "0" }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context "when the rgpd_agreement is not accepted" do
+      let(:rgpd_agreement) { "0" }
 
       it { is_expected.to be_invalid }
     end

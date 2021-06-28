@@ -93,6 +93,7 @@ describe "Registration", type: :system do
               select students_scope_1.name["en"]
 
               find(:css, "#registration_user_tos_agreement").set(true)
+              find(:css, "#registration_user_rgpd_agreement").set(true)
               within "form.new_user" do
                 find("*[type=submit]").click
               end

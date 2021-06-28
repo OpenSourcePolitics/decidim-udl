@@ -14,6 +14,7 @@ module Decidim
         let(:password) { "Y1fERVzL2F" }
         let(:password_confirmation) { password }
         let(:tos_agreement) { "1" }
+        let(:rgpd_agreement) { "1" }
         let(:newsletter) { "1" }
         let(:registration_metadata) do
           {
@@ -35,6 +36,7 @@ module Decidim
               "password" => password,
               "password_confirmation" => password_confirmation,
               "tos_agreement" => tos_agreement,
+              "rgpd_agreement" => rgpd_agreement,
               "status" => status,
               "provenance" => scope_id,
               "newsletter_at" => newsletter

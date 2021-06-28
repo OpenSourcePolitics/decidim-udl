@@ -37,6 +37,8 @@ en:
           partner: I am partner
           personal: I am personal
           provenance: Provenance
+          rgpd_agreement: I consent to the processing of my personal data for the purpose of implementing a participatory approach by the University of Lille.
+          rgpd_title: Consent to the use of my data
           status: Status
           student: I am a student
           teacher: I am a teacher
