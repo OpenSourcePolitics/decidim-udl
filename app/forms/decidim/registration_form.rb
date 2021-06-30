@@ -15,6 +15,7 @@ module Decidim
     attribute :password_confirmation, String
     attribute :newsletter, Boolean
     attribute :tos_agreement, Boolean
+    attribute :rgpd_agreement, Boolean
     attribute :current_locale, String
     attribute :status, String
     attribute :provenance, String
@@ -26,6 +27,7 @@ module Decidim
     validates :password, password: { name: :name, email: :email, username: :nickname }
     validates :password_confirmation, presence: true
     validates :tos_agreement, allow_nil: false, acceptance: true
+    validates :rgpd_agreement, allow_nil: false, acceptance: true
     validates :status, presence: true, inclusion: { in: STATUSES.collect { |status| status[:value] } }
 
     validate :email_unique_in_organization

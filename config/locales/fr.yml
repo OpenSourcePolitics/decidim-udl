@@ -37,6 +37,8 @@ fr:
           partner: Partenaire
           personal: Personnel
           provenance: Provenance
+          rgpd_agreement: Je consens à ce que mes données personnelles soient traitées à des fins de mise en place d’une démarche participative par l’Université de Lille.
+          rgpd_title: Consentement à l'utilisation de mes données
           status: Statut
           student: Étudiant
           teacher: Enseignant / Chercheur
