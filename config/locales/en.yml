@@ -67,6 +67,7 @@ en:
   faker:
     address:
       country_code: '["FR", "FR0", "FR1", "FR2", "FR3", "FR4", "FR5", "FR6", "FR7", "FR8", "FR9"]'
+  inactive_delete_reason: Account was deleted due to inactivity
   layouts:
     decidim:
       footer:
@@ -81,4 +82,3 @@ en:
       user_menu:
         conversations: Conversations
         notifications: Notifications
-  inactive_delete_reason: "Account was deleted due to inactivity"
