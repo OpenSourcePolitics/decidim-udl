@@ -78,7 +78,7 @@ fr:
       - FR7
       - FR8
       - FR9
-  inactive_delete_reason: Account was deleted due to inactivity
+  inactive_delete_reason: Le compte a été supprimé en raison de son inactivité.
   layouts:
     decidim:
       footer:
