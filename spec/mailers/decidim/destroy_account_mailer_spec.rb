@@ -11,7 +11,7 @@ module Decidim
       let(:mail) { described_class.notify_of_deletion(user) }
 
       let(:subject) { "Subject" }
-      let(:default_subject) { "Subject" }
+      let(:default_subject) { "Your account has been deleted" }
 
       let(:body) { "" }
       let(:default_body) { "" }
@@ -23,7 +23,7 @@ module Decidim
       let(:mail) { described_class.warn_of_deletion(user) }
 
       let(:subject) { "Subject" }
-      let(:default_subject) { "Subject" }
+      let(:default_subject) { "Your account will be deleted if you don't log in again" }
 
       let(:body) { "" }
       let(:default_body) { "" }
