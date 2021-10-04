@@ -6,6 +6,15 @@ class DestroyInactiveUsersJob < ApplicationJob
   queue_as :scheduled
 
   def perform
-    system "rake decidim:destroy_inactive_users"
+    Rails.application.load_tasks
+
+    Rake::Task[task].reenable
+    Rake::Task[task].invoke
+  end
+
+  private
+
+  def task
+    "decidim:destroy_inactive_users"
   end
 end
