@@ -1,5 +1,5 @@
 ---
-en:
+ca:
   activemodel:
     attributes:
       osp_authorization_handler:
@@ -33,26 +33,14 @@ en:
     destroy_account_mailer:
       notify_of_deletion:
         hello: Hello %{name}
-        notify_of_deletion_account_html: Your account has not been used in the last 18 months and has been deleted from %{organization}.
-        notify_of_deletion_explanation: A message was sent to you a month ago to warn you of this deletion.
-        subject: Your account has been deleted
+        notify_of_deletion_account_html: Notify of deletion account html
+        notify_of_deletion_explanation: Notify of deletion explanation
+        subject: Subject
       warn_of_deletion:
         hello: Hello %{name}
-        subject: Your account will be deleted if you don't log in again
-        warn_of_deletion_account_explanation: If you wish to keep your account, log in at %{organization}.
-        warn_of_deletion_account_html: Votre compte n'a pas été utilisé au cours des 17 derniers mois et sera supprimé dans un mois.
-    devise:
-      registrations:
-        new:
-          blank: Please select a provenance
-          partner: I am partner
-          personal: I am personal
-          provenance: Provenance
-          rgpd_agreement: I consent to the processing of my personal data for the purpose of implementing a participatory approach by the University of Lille.
-          rgpd_title: Consent to the use of my data
-          status: Status
-          student: I am a student
-          teacher: I am a teacher
+        subject: Subject
+        warn_of_deletion_account_explanation: Warn of deletion account explanation
+        warn_of_deletion_account_html: Warn of deletion account html
     verifications:
       authorizations:
         first_login:
